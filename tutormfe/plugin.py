@@ -44,6 +44,18 @@ config = {
                 },
             },
         },
+        "DISCUSSIONS_MFE_APP": {
+            "name": "discussions",
+            "repository": "https://github.com/openedx/frontend-app-discussions",
+            "port": 2002,
+            "env": {
+                "production": {
+                    "TA_FEEDBACK_FORM": "",
+                    "STAFF_FEEDBACK_FORM": "",
+                    "DISPLAY_FEEDBACK_BANNER": "false",
+                },
+            },
+        },
     },
 }
 
