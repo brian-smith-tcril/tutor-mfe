@@ -51,15 +51,6 @@ config = {
         },
     },
 }
-ALL_MFES = (
-    "account",
-    "course-authoring",
-    "discussions",
-    "authn",
-    "gradebook",
-    "learning",
-    "profile",
-)
 
 with open(
     os.path.join(
@@ -94,22 +85,6 @@ tutor_hooks.Filters.IMAGES_PUSH.add_item(
         "{{ MFE_DOCKER_IMAGE }}",
     )
 )
-
-# Build, pull and push {mfe}-dev images
-for mfe in ALL_MFES:
-    name = f"{mfe}-dev"
-    tag = "{{ DOCKER_REGISTRY }}overhangio/openedx-" + mfe + "-dev:{{ MFE_VERSION }}"
-    tutor_hooks.Filters.IMAGES_BUILD.add_item(
-        (
-            name,
-            ("plugins", "mfe", "build", "mfe"),
-            tag,
-            (f"--target={mfe}-dev",),
-        )
-    )
-    tutor_hooks.Filters.IMAGES_PULL.add_item((name, tag))
-    tutor_hooks.Filters.IMAGES_PUSH.add_item((name, tag))
-
 
 @tutor_hooks.Filters.COMPOSE_MOUNTS.add()
 def _mount_frontend_apps(volumes, name):
