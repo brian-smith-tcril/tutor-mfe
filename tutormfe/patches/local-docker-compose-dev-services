@@ -33,6 +33,8 @@ caddy:
         - "{{ LMS_HOST }}"
         {{ patch("local-docker-compose-caddy-aliases")|indent(10) }}
   {% endif %}
+  # extra_hosts:
+  #   - host.docker.internal:host-gateway
 mfe:
     image: {{ MFE_DOCKER_IMAGE }}
     restart: unless-stopped

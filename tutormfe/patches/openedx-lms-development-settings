@@ -83,8 +83,8 @@ DISCUSSIONS_MFE_FEEDBACK_URL = None
 {% if MFE_AUTHN_MFE_APP %}
 # AUTHN_MICROFRONTEND_URL = "{% if ENABLE_HTTPS %}https://{% else %}http://{% endif %}{{ MFE_HOST }}/{{ MFE_AUTHN_MFE_APP["name"] }}"
 # AUTHN_MICROFRONTEND_DOMAIN  = "{{ MFE_HOST }}/{{ MFE_AUTHN_MFE_APP["name"] }}"
-AUTHN_MICROFRONTEND_URL = "http://localhost:1999"
-AUTHN_MICROFRONTEND_DOMAIN = "localhost:1999"
+AUTHN_MICROFRONTEND_URL = "http://local.overhang.io:1999"
+AUTHN_MICROFRONTEND_DOMAIN = "local.overhang.io:1999"
 {% endif %}
 
 LOGIN_REDIRECT_WHITELIST.append("{{ MFE_HOST }}")
@@ -92,9 +92,9 @@ CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https://{% else %}http://{% e
 
 {% for app in iter_values_named(suffix="MFE_APP") %}
 # {{ app["name"] }} MFE
-CORS_ORIGIN_WHITELIST.append("http://localhost:{{ app["port"] }}")
-LOGIN_REDIRECT_WHITELIST.append("localhost:{{ app["port"] }}")
-CSRF_TRUSTED_ORIGINS.append("localhost:{{ app["port"] }}")
+CORS_ORIGIN_WHITELIST.append("http://local.overhang.io:{{ app["port"] }}")
+LOGIN_REDIRECT_WHITELIST.append("local.overhang.io:{{ app["port"] }}")
+CSRF_TRUSTED_ORIGINS.append("local.overhang.io:{{ app["port"] }}")
 {% endfor %}
 
 # Dynamic config API settings
@@ -107,16 +107,16 @@ MFE_CONFIG = {
 {%- endif %}
     "CREDENTIALS_BASE_URL": "",
     "DISCOVERY_API_BASE_URL": "{% if DISCOVERY_HOST is defined %}{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ DISCOVERY_HOST }}{% endif %}",
-    "FAVICON_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/favicon.ico",
+    "FAVICON_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/favicon.ico",
     "LANGUAGE_PREFERENCE_COOKIE_NAME": "openedx-language-preference",
-    "LMS_BASE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}",
-    "LOGIN_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/login",
-    "LOGO_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/theming/asset/images/logo.png",
-    "LOGO_WHITE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/theming/asset/images/logo.png",
-    "LOGO_TRADEMARK_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/theming/asset/images/logo.png",
-    "LOGOUT_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/logout",
-    "MARKETING_SITE_BASE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}",
-    "REFRESH_ACCESS_TOKEN_ENDPOINT": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/login_refresh",
+    "LMS_BASE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000",
+    "LOGIN_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/login",
+    "LOGO_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/theming/asset/images/logo.png",
+    "LOGO_WHITE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/theming/asset/images/logo.png",
+    "LOGO_TRADEMARK_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/theming/asset/images/logo.png",
+    "LOGOUT_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/logout",
+    "MARKETING_SITE_BASE_URL": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000",
+    "REFRESH_ACCESS_TOKEN_ENDPOINT": "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}:8000/login_refresh",
     "SITE_NAME": "{{ PLATFORM_NAME }}",
     "STUDIO_BASE_URL": "{{ "https" if ENABLE_HTTPS else "http" }}://{{ CMS_HOST }}",
     "USER_INFO_COOKIE_NAME": "user-info",

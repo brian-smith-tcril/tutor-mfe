@@ -13,3 +13,10 @@ COURSE_AUTHORING_MICROFRONTEND_URL = "{% if ENABLE_HTTPS %}https://{% else %}htt
 LOGIN_REDIRECT_WHITELIST.append("{{ MFE_HOST }}")
 CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https://{% else %}http://{% endif %}{{ MFE_HOST }}")
 CSRF_TRUSTED_ORIGINS.append("{{ MFE_HOST }}")
+
+{% for app in iter_values_named(suffix="MFE_APP") %}
+# {{ app["name"] }} MFE
+CORS_ORIGIN_WHITELIST.append("http://local.overhang.io:{{ app["port"] }}")
+LOGIN_REDIRECT_WHITELIST.append("local.overhang.io:{{ app["port"] }}")
+CSRF_TRUSTED_ORIGINS.append("local.overhang.io:{{ app["port"] }}")
+{% endfor %}
