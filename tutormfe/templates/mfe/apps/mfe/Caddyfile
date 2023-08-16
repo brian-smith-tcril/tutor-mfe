@@ -30,3 +30,7 @@
     }
     {% endfor %}
 }
+
+# reverse_proxy host.docker.internal:1999 {
+#     header_up X-Real-IP {remote_host}
+# }
