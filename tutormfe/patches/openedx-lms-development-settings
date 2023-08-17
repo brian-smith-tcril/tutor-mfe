@@ -24,8 +24,8 @@ MFE_CONFIG = {
 # MFE-specific settings
 {% for app_name, app in iter_mfes() %}
 {% if app_name == "authn" %}
-AUTHN_MICROFRONTEND_URL = "http://{{ MFE_HOST }}:{{ app["port"] }}/authn"
-AUTHN_MICROFRONTEND_DOMAIN  = "{{ MFE_HOST }}/authn"
+AUTHN_MICROFRONTEND_URL = "http://local.overhang.io:1999"
+AUTHN_MICROFRONTEND_DOMAIN = "local.overhang.io:1999"
 MFE_CONFIG["DISABLE_ENTERPRISE_LOGIN"] = True
 {% elif app_name == "account" %}
 ACCOUNT_MICROFRONTEND_URL = "http://{{ MFE_HOST }}:{{ app["port"] }}/account"
@@ -58,7 +58,10 @@ MFE_CONFIG["SCHEDULE_EMAIL_SECTION"] = True
 CORS_ORIGIN_WHITELIST.append("http://{{ MFE_HOST }}:{{ app["port"] }}")
 LOGIN_REDIRECT_WHITELIST.append("{{ MFE_HOST }}:{{ app["port"] }}")
 CSRF_TRUSTED_ORIGINS.append("{{ MFE_HOST }}:{{ app["port"] }}")
+CORS_ORIGIN_WHITELIST.append("http://local.overhang.io:{{ app["port"] }}")
+LOGIN_REDIRECT_WHITELIST.append("local.overhang.io:{{ app["port"] }}")
+CSRF_TRUSTED_ORIGINS.append("local.overhang.io:{{ app["port"] }}")
 {% endfor %}
 
-{{ patch("mfe-lms-common-settings") }}
-{{ patch("mfe-lms-development-settings") }}
+LOGIN_REDIRECT_WHITELIST.append("{{ MFE_HOST }}")
+CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https://{% else %}http://{% endif %}{{ MFE_HOST }}")
