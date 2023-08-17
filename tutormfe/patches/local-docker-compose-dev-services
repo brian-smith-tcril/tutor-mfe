@@ -1,21 +1,3 @@
-# MFE apps
-# {% for app_name, app in iter_mfes() %}
-# {{ app_name }}:
-#     image: "{{ DOCKER_REGISTRY }}overhangio/openedx-{{ app_name }}-dev:{{ MFE_VERSION }}"
-#     ports:
-#         - "{{ app["port"] }}:{{ app["port"] }}"
-#     stdin_open: true
-#     tty: true
-#     volumes:
-#         - ../plugins/mfe/apps/mfe/webpack.dev-tutor.config.js:/openedx/app/webpack.dev-tutor.config.js:ro
-#         {%- for mount in iter_mounts(MOUNTS, app_name) %}
-#         - {{ mount }}
-#         {%- endfor %}
-#     restart: unless-stopped
-#     depends_on:
-#         - lms
-# {% endfor %}
-
 # Web proxy for load balancing and SSL termination
 caddy:
   image: {{ DOCKER_IMAGE_CADDY }}
@@ -37,8 +19,6 @@ caddy:
         - "{{ LMS_HOST }}"
         {{ patch("local-docker-compose-caddy-aliases")|indent(10) }}
   {% endif %}
-  # extra_hosts:
-  #   - host.docker.internal:host-gateway
 mfe:
     image: {{ MFE_DOCKER_IMAGE }}
     restart: unless-stopped

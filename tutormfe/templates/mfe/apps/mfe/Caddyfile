@@ -24,13 +24,3 @@
     }
     {% endfor %}
 }
-
-# apps.local.overhang.io {
-#     reverse_proxy host.docker.internal:1999 {
-#         header_up X-Real-IP {remote_host}
-#     }
-# }
-
-reverse_proxy host.docker.internal:2000 {
-    header_up X-Real-IP {remote_host}
-}
